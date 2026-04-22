@@ -1,0 +1,327 @@
+{
+  "strategy_name": "Breakout 15M - Optimized for Quick Exits",
+  "version": "2.0",
+  "updated": "2025-11-02",
+  "description": "Optimized based on real trading data: Close 70% at TP1 (3-4h), avoid 6-8h reversal",
+
+  "timeframe": "15m",
+  "exchange": ["BYBIT", "KUCOIN"],
+  "max_hold_time": "6 hours",
+
+  "entry_conditions": {
+    "bb_squeeze": {
+      "enabled": true,
+      "bbw_threshold": 0.030,
+      "ultra_tight": 0.015,
+      "comment": "Bollinger Band Width <0.030 indicates consolidation before breakout"
+    },
+
+    "bb_rating": {
+      "min": 2,
+      "optimal": 3,
+      "comment": "BB Rating +2 or higher = Strong buy signal"
+    },
+
+    "rsi": {
+      "min": 40,
+      "max": 70,
+      "optimal_min": 45,
+      "optimal_max": 55,
+      "comment": "RSI 45-55 = Perfect entry zone, 40-70 acceptable"
+    },
+
+    "volume": {
+      "required": true,
+      "spike_threshold": 1.5,
+      "comment": "Volume should be 1.5x average for confirmation"
+    },
+
+    "ema_structure": {
+      "golden_cross": "preferred",
+      "min_requirement": "price_above_ema50",
+      "comment": "Price > EMA50 > EMA200 = Best. Minimum: Price > EMA50"
+    },
+
+    "adx": {
+      "min": 20,
+      "strong": 30,
+      "comment": "ADX >20 shows trend exists, >30 = strong trend"
+    }
+  },
+
+  "exit_strategy": {
+    "philosophy": "Lock profit at peak (3-4h), avoid reversal (6-8h)",
+
+    "time_based_management": {
+      "enabled": true,
+      "comment": "Critical: Crypto 15m breakouts peak at 3-4h, reverse at 6-8h",
+
+      "hour_0_2": {
+        "description": "Initial momentum phase",
+        "actions": [
+          "Monitor for quick +2% move",
+          "If +2% in <1h: Consider closing 20% (very strong momentum)",
+          "Keep initial SL at -3%"
+        ]
+      },
+
+      "hour_2_4": {
+        "description": "GOLDEN WINDOW - Peak profit zone",
+        "actions": [
+          "If hit +4.5% (TP1): CLOSE 70% IMMEDIATELY",
+          "Move SL to BREAKEVEN (0%) for remaining 30%",
+          "If only +2-3%: Close 50%, move SL to -1.5%",
+          "If flat (0-1%): Tighten SL to -2%, keep watching"
+        ],
+        "critical": true
+      },
+
+      "hour_4_6": {
+        "description": "Decision phase - close or trail",
+        "actions": [
+          "If hit +7.5% (TP2): Close remaining 30%",
+          "If still at +4-5%: Close remaining 30% (take profit!)",
+          "If at breakeven: SL will exit automatically",
+          "DO NOT HOLD past 6h without good reason"
+        ]
+      },
+
+      "hour_6_plus": {
+        "description": "DANGER ZONE - Force exit",
+        "actions": [
+          "CLOSE ALL REMAINING POSITIONS",
+          "Don't hold overnight on 15m signals",
+          "Reversal risk too high after 6-8 hours"
+        ],
+        "force_close": true
+      }
+    },
+
+    "targets": {
+      "tp1": {
+        "percent": 4.5,
+        "close_percent": 70,
+        "time_window": "2-4 hours",
+        "action_after": "move_sl_to_breakeven",
+        "comment": "MOST IMPORTANT: Close 70% here, not 50%!"
+      },
+
+      "tp2": {
+        "percent": 7.5,
+        "close_percent": 30,
+        "time_window": "4-6 hours",
+        "comment": "Close remaining if reached. Don't be greedy!"
+      },
+
+      "tp3": {
+        "percent": 10.5,
+        "close_percent": 0,
+        "comment": "DISABLED for 15m. Too rare to hit without reversal.",
+        "enabled": false
+      }
+    },
+
+    "stop_loss_dynamic": {
+      "initial": -3.0,
+      "comment": "Dynamic SL based on time and profit",
+
+      "adjustments": [
+        {
+          "trigger": "after_2_hours",
+          "new_sl": -1.5,
+          "reason": "Tighten if no momentum after 2h"
+        },
+        {
+          "trigger": "hit_tp1",
+          "new_sl": 0.0,
+          "reason": "BREAKEVEN after TP1 = Zero risk!"
+        },
+        {
+          "trigger": "hit_tp2",
+          "new_sl": 2.0,
+          "reason": "Lock +2% profit if somehow still holding"
+        }
+      ]
+    }
+  },
+
+  "risk_management": {
+    "position_sizing": {
+      "default": 2.5,
+      "min": 2.0,
+      "max": 4.0,
+      "unit": "percent_of_portfolio",
+      "comment": "2-4% per trade based on signal quality"
+    },
+
+    "max_positions": {
+      "concurrent": 5,
+      "comment": "Max 5 positions at once = 10-20% total exposure"
+    },
+
+    "max_exposure": {
+      "percent": 15,
+      "comment": "Never risk more than 15% of portfolio at once"
+    },
+
+    "max_loss_per_trade": {
+      "percent": 3.0,
+      "comment": "Initial SL at -3%, but should rarely hit with breakeven SL"
+    },
+
+    "daily_loss_limit": {
+      "percent": 5.0,
+      "action": "stop_trading_for_day",
+      "comment": "If lose 5% in one day, stop and review"
+    }
+  },
+
+  "advanced_filters": {
+    "description": "Optional filters to increase win rate (but reduce signal count)",
+
+    "multiple_timeframe_confirm": {
+      "enabled": false,
+      "comment": "Enable if win rate <70%. Reduces signals from 5-10/day to 2-3/day",
+
+      "requirements": {
+        "1h_must_be_bullish": {
+          "bb_rating": ">=1",
+          "rsi": ">45",
+          "price_above_ema50": true
+        },
+
+        "4h_must_not_be_bearish": {
+          "bb_rating": ">=0",
+          "rsi": ">35",
+          "not_strong_downtrend": true
+        }
+      }
+    },
+
+    "time_of_day_filter": {
+      "enabled": false,
+      "comment": "Enable to avoid low-volume periods",
+
+      "preferred_hours_utc": [
+        "08:00-12:00 (EU session)",
+        "12:00-16:00 (US open - best!)",
+        "00:00-04:00 (Asia session)"
+      ],
+
+      "avoid_hours_utc": [
+        "04:00-08:00 (Dead zone - fake breakouts)"
+      ]
+    },
+
+    "quality_score_min": {
+      "enabled": true,
+      "minimum": 8,
+      "optimal": 12,
+      "comment": "Only take signals with Quality Score 8+. 12+ = exceptional"
+    }
+  },
+
+  "performance_targets": {
+    "win_rate": {
+      "target": 75,
+      "minimum_acceptable": 65,
+      "current_issue": "60% (too many hold past 6h)",
+      "with_optimization": "75-80% expected"
+    },
+
+    "average_win": {
+      "target": 4.0,
+      "comment": "With 70% at TP1 +4.5% = +3.15% average"
+    },
+
+    "average_loss": {
+      "target": -1.0,
+      "comment": "With breakeven SL, most losses are small or zero"
+    },
+
+    "risk_reward": {
+      "target": "1:3",
+      "comment": "Risk 1% to make 3%+ on average"
+    }
+  },
+
+  "trading_journal_requirements": {
+    "mandatory_fields": [
+      "entry_time",
+      "entry_price",
+      "tp1_time",
+      "tp1_close_percent",
+      "final_exit_time",
+      "total_hold_hours",
+      "profit_percent",
+      "did_hit_6h_mark",
+      "notes"
+    ],
+
+    "review_frequency": "every_20_trades",
+    "comment": "Track to see if 3-4h peak pattern holds true"
+  },
+
+  "examples": {
+    "example_1_perfect_trade": {
+      "symbol": "AAVEUSDT",
+      "entry": "$223.25 at 10:00",
+      "hour_3": "$233.30 (+4.5%)",
+      "action": "Close 70% = +$3.15 profit",
+      "sl_moved": "To $223.25 (breakeven)",
+      "hour_5": "$235.50 (+5.5%)",
+      "final_exit": "Close 30% = +$1.65 profit",
+      "total_profit": "+$4.80 (+2.15%)",
+      "result": "WIN ✅"
+    },
+
+    "example_2_reverse_trade": {
+      "symbol": "AXSUSDT",
+      "entry": "$1.448 at 10:00",
+      "hour_3": "$1.513 (+4.5%)",
+      "action": "Close 70% = +$3.15 profit",
+      "sl_moved": "To $1.448 (breakeven)",
+      "hour_7": "$1.450 (reverse to breakeven)",
+      "final_exit": "SL hit at $1.448 = $0 profit on remaining",
+      "total_profit": "+$3.15 (+1.57%)",
+      "result": "WIN ✅ (Old strategy = -3% LOSS!)"
+    },
+
+    "example_3_no_tp1": {
+      "symbol": "BTCUSDT",
+      "entry": "$110,000 at 10:00",
+      "hour_2": "$110,500 (+0.45%)",
+      "action": "Move SL to -1.5%",
+      "hour_4": "$109,800 (-0.18%)",
+      "hour_6": "$108,500 (-1.36%)",
+      "final_exit": "Force close at 6h = -$1.36%",
+      "total_profit": "-$1.36%",
+      "result": "SMALL LOSS (Old strategy = -3%!)"
+    }
+  },
+
+  "migration_from_old_strategy": {
+    "old_exit": "TP1 50%, TP2 30%, TP3 20%",
+    "new_exit": "TP1 70%, TP2 30%, TP3 disabled",
+
+    "old_sl": "Fixed -3%",
+    "new_sl": "Dynamic: -3% → -1.5% → 0% (breakeven)",
+
+    "old_hold_time": "1-3 days",
+    "new_hold_time": "Max 6 hours (force exit)",
+
+    "expected_improvement": {
+      "win_rate": "60% → 75-80%",
+      "avg_win": "+4.5% → +3-4% (but more consistent!)",
+      "avg_loss": "-3% → -0.5% to -1.5%",
+      "mental_stress": "High → Low (clear rules!)"
+    }
+  },
+
+  "implementation_notes": {
+    "week_1": "Test with small size (1-2% positions) to verify",
+    "week_2": "Full size if win rate >70%",
+    "week_3": "Add multiple timeframe filter if needed",
+    "week_4": "Review journal, fine-tune"
+  }
+}

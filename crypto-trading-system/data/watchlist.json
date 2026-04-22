@@ -1,0 +1,16 @@
+{
+  "watchlist": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "ADAUSDT",
+    "DOGEUSDT",
+    "MATICUSDT",
+    "DOTUSDT",
+    "AVAXUSDT"
+  ],
+  "notes": "Danh sách coin theo dõi hàng ngày",
+  "last_updated": "2025-01-01"
+}

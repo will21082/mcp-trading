@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs & Cache
+logs/
+*.log
+cache/
+.cache/
+
+# Project specific
+backend/venv/
+backend/__pycache__/
+crypto-trading-system/__pycache__/
+crypto-trading-system/logs/
+frontend/node_modules/
+frontend/dist/
+web-ui/node_modules/
+web-ui/venv/
+web-ui/dist/
+tradingview-mcp/.venv/
+tradingview-mcp/dist/
+tradingview-mcp/__pycache__/

@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+      "tradingview-mcp-local": {
+        "command": "uv",
+        "args": ["run", "python", "src/tradingview_mcp/server.py"],
+        "cwd": "/Users/will208/Desktop/MCP\\ Trading\\ /tradingview-mcp"
+      }
+    }
+  }

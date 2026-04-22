@@ -1,0 +1,1340 @@
+[
+  {
+    "symbol": "BOBAUSDT",
+    "price": 0.05602,
+    "confidence": 6,
+    "signals": [
+      "BB Squeeze: 0.0281",
+      "RSI Healthy: 65.4",
+      "Strong Trend ADX: 28.0",
+      "BB Rating: +3 (Strong Buy)",
+      "MACD Bullish: 0.000100"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.0281331769593112,
+      "rsi": 65.35211267605638,
+      "adx": 27.981318558204425,
+      "bb_rating": "3",
+      "volume_ratio": 0.49905796567847044,
+      "price_change": 0.03571428571429447,
+      "macd": 0.00010007188238201487
+    },
+    "entry_plan": {
+      "entry": 0.05602,
+      "stop_loss": 0.054339399999999996,
+      "tp1": 0.05854090000000001,
+      "tp2": 0.06106180000000001,
+      "tp3": 0.06358270000000002,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:58.230234"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "price": 102559.0,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0145",
+      "RSI Healthy: 64.3",
+      "Strong Trend ADX: 28.1",
+      "BB Rating: +1",
+      "MACD Bullish: 186.675672"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.01445594813211591,
+      "rsi": 64.26009734437736,
+      "adx": 28.138634781886417,
+      "bb_rating": "1",
+      "volume_ratio": 0.08982364272975794,
+      "price_change": -0.15858351529711712,
+      "macd": 186.6756724120787
+    },
+    "entry_plan": {
+      "entry": 102559.0,
+      "stop_loss": 99482.23,
+      "tp1": 107174.155,
+      "tp2": 111789.31000000001,
+      "tp3": 116404.46500000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:43.284769"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "price": 3340.26,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0241",
+      "RSI Healthy: 60.5",
+      "Strong Trend ADX: 34.2",
+      "BB Rating: +1",
+      "MACD Bullish: 7.470025"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.024118247616073195,
+      "rsi": 60.45951709431115,
+      "adx": 34.189698701120264,
+      "bb_rating": "1",
+      "volume_ratio": 0.04993114479532814,
+      "price_change": -0.2818162820551029,
+      "macd": 7.47002538953393
+    },
+    "entry_plan": {
+      "entry": 3340.26,
+      "stop_loss": 3240.0522,
+      "tp1": 3490.5717000000004,
+      "tp2": 3640.8834000000006,
+      "tp3": 3791.195100000001,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:43.527779"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "price": 2.2425,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0176",
+      "RSI Healthy: 55.5",
+      "Strong Trend ADX: 29.6",
+      "BB Rating: +1",
+      "MACD Bullish: 0.003567"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.01758545812018144,
+      "rsi": 55.46012269938655,
+      "adx": 29.626628135242488,
+      "bb_rating": "1",
+      "volume_ratio": 0.048842112913228916,
+      "price_change": -0.28014941302028085,
+      "macd": 0.003567290471335749
+    },
+    "entry_plan": {
+      "entry": 2.2425,
+      "stop_loss": 2.175225,
+      "tp1": 2.3434125000000003,
+      "tp2": 2.444325,
+      "tp3": 2.5452375,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:43.766312"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "price": 0.2752,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0237",
+      "RSI Healthy: 61.5",
+      "Strong Trend ADX: 28.6",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000711"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.023711609575447927,
+      "rsi": 61.46788990825705,
+      "adx": 28.64263931354919,
+      "bb_rating": "1",
+      "volume_ratio": 0.0021486514512695397,
+      "price_change": -0.217548948513413,
+      "macd": 0.0007114136858266673
+    },
+    "entry_plan": {
+      "entry": 0.2752,
+      "stop_loss": 0.266944,
+      "tp1": 0.28758399999999995,
+      "tp2": 0.29996799999999996,
+      "tp3": 0.31235199999999996,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:44.265395"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "price": 86.73,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0186",
+      "RSI Healthy: 48.1",
+      "Strong Trend ADX: 27.7",
+      "BB Rating: +1",
+      "MACD Bullish: 0.041302"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.018607367725559442,
+      "rsi": 48.138957816377285,
+      "adx": 27.711063589203672,
+      "bb_rating": "1",
+      "volume_ratio": 0.05038231483020782,
+      "price_change": -0.18414086776383787,
+      "macd": 0.04130218751600978
+    },
+    "entry_plan": {
+      "entry": 86.73,
+      "stop_loss": 84.1281,
+      "tp1": 90.63285,
+      "tp2": 94.5357,
+      "tp3": 98.43855,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:44.520327"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "price": 0.16429,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0196",
+      "RSI Healthy: 52.5",
+      "Strong Trend ADX: 34.2",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000137"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.019554230185837403,
+      "rsi": 52.50596658711221,
+      "adx": 34.213849946893504,
+      "bb_rating": "1",
+      "volume_ratio": 0.07169799201652116,
+      "price_change": -0.2549936251593721,
+      "macd": 0.00013695885120917906
+    },
+    "entry_plan": {
+      "entry": 0.16429,
+      "stop_loss": 0.15936129999999998,
+      "tp1": 0.17168305,
+      "tp2": 0.17907610000000002,
+      "tp3": 0.18646915000000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:44.770686"
+  },
+  {
+    "symbol": "COMPUSDT",
+    "price": 31.7,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0241",
+      "RSI Healthy: 64.6",
+      "Strong Trend ADX: 37.1",
+      "BB Rating: +1",
+      "MACD Bullish: 0.067563"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02409456191560528,
+      "rsi": 64.5669291338584,
+      "adx": 37.08636756913919,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 0.06756342868366616
+    },
+    "entry_plan": {
+      "entry": 31.7,
+      "stop_loss": 30.749,
+      "tp1": 33.1265,
+      "tp2": 34.553,
+      "tp3": 35.9795,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:46.177395"
+  },
+  {
+    "symbol": "YFIUSDT",
+    "price": 4440.0,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0230",
+      "RSI Healthy: 62.4",
+      "Strong Trend ADX: 26.2",
+      "BB Rating: +1",
+      "MACD Bullish: 16.368102"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02301503830679144,
+      "rsi": 62.35294117647059,
+      "adx": 26.23259746032294,
+      "bb_rating": "1",
+      "volume_ratio": 0.12459618125679299,
+      "price_change": -0.15740948954351408,
+      "macd": 16.368101560225114
+    },
+    "entry_plan": {
+      "entry": 4440.0,
+      "stop_loss": 4306.8,
+      "tp1": 4639.799999999999,
+      "tp2": 4839.599999999999,
+      "tp3": 5039.4,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:46.830104"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "price": 14.88,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0248",
+      "RSI Healthy: 56.0",
+      "Strong Trend ADX: 26.6",
+      "BB Rating: +1",
+      "MACD Bullish: 0.027491"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.024760570277509043,
+      "rsi": 56.00000000000012,
+      "adx": 26.627805292344014,
+      "bb_rating": "1",
+      "volume_ratio": 0.024926838708873342,
+      "price_change": -0.2680965147452974,
+      "macd": 0.027490966208951306
+    },
+    "entry_plan": {
+      "entry": 14.88,
+      "stop_loss": 14.4336,
+      "tp1": 15.549600000000002,
+      "tp2": 16.2192,
+      "tp3": 16.888800000000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:47.078210"
+  },
+  {
+    "symbol": "KSMUSDT",
+    "price": 9.21,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0279",
+      "RSI Healthy: 56.6",
+      "Strong Trend ADX: 29.3",
+      "BB Rating: +1",
+      "MACD Bullish: 0.016422"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.027881441192990197,
+      "rsi": 56.60377358490567,
+      "adx": 29.327737068573118,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 0.01642218238851001
+    },
+    "entry_plan": {
+      "entry": 9.21,
+      "stop_loss": 8.9337,
+      "tp1": 9.624450000000003,
+      "tp2": 10.038900000000003,
+      "tp3": 10.453350000000004,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:47.915028"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "price": 0.5376,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0297",
+      "RSI Healthy: 61.6",
+      "Strong Trend ADX: 32.3",
+      "BB Rating: +1",
+      "MACD Bullish: 0.002075"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02965974628018327,
+      "rsi": 61.57024793388401,
+      "adx": 32.322347039669346,
+      "bb_rating": "1",
+      "volume_ratio": 0.018514364081708024,
+      "price_change": -0.27824151363384786,
+      "macd": 0.0020752088316254858
+    },
+    "entry_plan": {
+      "entry": 0.5376,
+      "stop_loss": 0.5214719999999999,
+      "tp1": 0.5617920000000001,
+      "tp2": 0.5859840000000001,
+      "tp3": 0.610176,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:48.457442"
+  },
+  {
+    "symbol": "ETCUSDT",
+    "price": 14.46,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0259",
+      "RSI Healthy: 59.7",
+      "Strong Trend ADX: 31.3",
+      "BB Rating: +1",
+      "MACD Bullish: 0.022043"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.025873333152455148,
+      "rsi": 59.7014925373135,
+      "adx": 31.330749196799097,
+      "bb_rating": "1",
+      "volume_ratio": 0.28525767027987775,
+      "price_change": -0.06910850034553828,
+      "macd": 0.022043318222404906
+    },
+    "entry_plan": {
+      "entry": 14.46,
+      "stop_loss": 14.026200000000001,
+      "tp1": 15.110700000000001,
+      "tp2": 15.7614,
+      "tp3": 16.4121,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:48.720924"
+  },
+  {
+    "symbol": "XTZUSDT",
+    "price": 0.5281,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0239",
+      "RSI Healthy: 61.0",
+      "Strong Trend ADX: 26.8",
+      "BB Rating: +1",
+      "MACD Bullish: 0.001797"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.023882025542052043,
+      "rsi": 60.97560975609779,
+      "adx": 26.827870803054093,
+      "bb_rating": "1",
+      "volume_ratio": 0.0954461606679114,
+      "price_change": -0.24556101246693274,
+      "macd": 0.0017974729174067283
+    },
+    "entry_plan": {
+      "entry": 0.5281,
+      "stop_loss": 0.512257,
+      "tp1": 0.5518645000000001,
+      "tp2": 0.5756290000000002,
+      "tp3": 0.5993935000000002,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:49.023218"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "price": 487.4,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0228",
+      "RSI Healthy: 58.5",
+      "Strong Trend ADX: 33.2",
+      "BB Rating: +1",
+      "MACD Bullish: 1.134887"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.022751298179110768,
+      "rsi": 58.45410628019317,
+      "adx": 33.181001628383356,
+      "bb_rating": "1",
+      "volume_ratio": 0.014943368079322662,
+      "price_change": -0.24559967253378057,
+      "macd": 1.134887212263493
+    },
+    "entry_plan": {
+      "entry": 487.4,
+      "stop_loss": 472.77799999999996,
+      "tp1": 509.33299999999997,
+      "tp2": 531.2660000000001,
+      "tp3": 553.1990000000001,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:49.301857"
+  },
+  {
+    "symbol": "GRTUSDT",
+    "price": 0.0559,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0283",
+      "RSI Healthy: 60.0",
+      "Strong Trend ADX: 33.3",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000182"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.028341457203746343,
+      "rsi": 59.99999999999996,
+      "adx": 33.31661704589589,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 0.00018248243023887
+    },
+    "entry_plan": {
+      "entry": 0.0559,
+      "stop_loss": 0.05422299999999999,
+      "tp1": 0.05841550000000001,
+      "tp2": 0.06093100000000001,
+      "tp3": 0.06344650000000002,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:50.113007"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "price": 157.96,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0283",
+      "RSI Healthy: 57.7",
+      "Strong Trend ADX: 26.8",
+      "BB Rating: +1",
+      "MACD Bullish: 0.474080"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.028316744991144716,
+      "rsi": 57.7291381668947,
+      "adx": 26.824649249694904,
+      "bb_rating": "1",
+      "volume_ratio": 0.08039245942487672,
+      "price_change": -0.24628986422481347,
+      "macd": 0.47408046289174877
+    },
+    "entry_plan": {
+      "entry": 157.96,
+      "stop_loss": 153.2212,
+      "tp1": 165.0682,
+      "tp2": 172.1764,
+      "tp3": 179.2846,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:50.425368"
+  },
+  {
+    "symbol": "FILUSDT",
+    "price": 1.372,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0231",
+      "RSI Healthy: 50.7",
+      "Strong Trend ADX: 29.0",
+      "BB Rating: +1"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.023092622631314133,
+      "rsi": 50.70422535211276,
+      "adx": 29.04774677161683,
+      "bb_rating": "1",
+      "volume_ratio": 0.012084653910055615,
+      "price_change": -0.29069767441859407,
+      "macd": -0.00019120957771234792
+    },
+    "entry_plan": {
+      "entry": 1.372,
+      "stop_loss": 1.33084,
+      "tp1": 1.4337400000000002,
+      "tp2": 1.4954800000000004,
+      "tp3": 1.5572200000000005,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:50.724437"
+  },
+  {
+    "symbol": "ZRXUSDT",
+    "price": 0.1874,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0275",
+      "RSI Healthy: 49.5",
+      "Strong Trend ADX: 33.3",
+      "BB Rating: +1"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02747352656647642,
+      "rsi": 49.49494949494955,
+      "adx": 33.32481800126549,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": -0.000526566664476924
+    },
+    "entry_plan": {
+      "entry": 0.1874,
+      "stop_loss": 0.181778,
+      "tp1": 0.19583300000000003,
+      "tp2": 0.20426600000000006,
+      "tp3": 0.21269900000000008,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:51.249541"
+  },
+  {
+    "symbol": "CRVUSDT",
+    "price": 0.4273,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0275",
+      "RSI Healthy: 63.5",
+      "Strong Trend ADX: 37.4",
+      "BB Rating: +1",
+      "MACD Bullish: 0.001310"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02746208060268664,
+      "rsi": 63.45177664974634,
+      "adx": 37.4171891690335,
+      "bb_rating": "1",
+      "volume_ratio": 0.04558933987796972,
+      "price_change": -0.18687222611538656,
+      "macd": 0.0013101977684760735
+    },
+    "entry_plan": {
+      "entry": 0.4273,
+      "stop_loss": 0.414481,
+      "tp1": 0.44652850000000005,
+      "tp2": 0.4657570000000001,
+      "tp3": 0.4849855000000001,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:51.533080"
+  },
+  {
+    "symbol": "WAVESUSDT",
+    "price": 0.639,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0251",
+      "RSI Healthy: 53.2",
+      "Strong Trend ADX: 36.1",
+      "BB Rating: +1"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.025115723752279922,
+      "rsi": 53.19148936170213,
+      "adx": 36.06195217549103,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": -0.0006848254225396699
+    },
+    "entry_plan": {
+      "entry": 0.639,
+      "stop_loss": 0.61983,
+      "tp1": 0.6677550000000001,
+      "tp2": 0.6965100000000001,
+      "tp3": 0.725265,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:52.620980"
+  },
+  {
+    "symbol": "SHIBUSDT",
+    "price": 8.98e-06,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0203",
+      "RSI Healthy: 50.0",
+      "Strong Trend ADX: 39.7",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000000"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.020344154789378052,
+      "rsi": 50.0,
+      "adx": 39.66559507392422,
+      "bb_rating": "1",
+      "volume_ratio": 0.11773170861722455,
+      "price_change": -0.22222222222222365,
+      "macd": 7.688855190234137e-10
+    },
+    "entry_plan": {
+      "entry": 8.98e-06,
+      "stop_loss": 8.710600000000001e-06,
+      "tp1": 9.3841e-06,
+      "tp2": 9.788199999999999e-06,
+      "tp3": 1.0192299999999997e-05,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:53.419151"
+  },
+  {
+    "symbol": "ATOMUSDT",
+    "price": 2.606,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0243",
+      "RSI Healthy: 57.8",
+      "Strong Trend ADX: 25.8",
+      "BB Rating: +1",
+      "MACD Bullish: 0.012180"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.024308639448803956,
+      "rsi": 57.75862068965511,
+      "adx": 25.820584579882894,
+      "bb_rating": "1",
+      "volume_ratio": 0.10457779759540815,
+      "price_change": -0.22970903522205877,
+      "macd": 0.012179543340896881
+    },
+    "entry_plan": {
+      "entry": 2.606,
+      "stop_loss": 2.5278199999999997,
+      "tp1": 2.7232700000000003,
+      "tp2": 2.8405400000000003,
+      "tp3": 2.9578100000000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:53.686650"
+  },
+  {
+    "symbol": "WOOUSDT",
+    "price": 0.03207,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0267",
+      "RSI Healthy: 50.5",
+      "Strong Trend ADX: 29.6",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000063"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.026707363918793848,
+      "rsi": 50.48076923076921,
+      "adx": 29.616620780670498,
+      "bb_rating": "1",
+      "volume_ratio": 0.11989245864292775,
+      "price_change": -0.31084861672364683,
+      "macd": 6.305528380622788e-05
+    },
+    "entry_plan": {
+      "entry": 0.03207,
+      "stop_loss": 0.0311079,
+      "tp1": 0.033513150000000005,
+      "tp2": 0.0349563,
+      "tp3": 0.03639945,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:55.001119"
+  },
+  {
+    "symbol": "ENSUSDT",
+    "price": 12.71,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0184",
+      "RSI Healthy: 50.7",
+      "Strong Trend ADX: 27.4",
+      "BB Rating: +1",
+      "MACD Bullish: 0.014828"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.018443245779493567,
+      "rsi": 50.68493150684942,
+      "adx": 27.394167535596385,
+      "bb_rating": "1",
+      "volume_ratio": 0.12849634569606075,
+      "price_change": -0.23547880690737433,
+      "macd": 0.01482826900187284
+    },
+    "entry_plan": {
+      "entry": 12.71,
+      "stop_loss": 12.328700000000001,
+      "tp1": 13.28195,
+      "tp2": 13.8539,
+      "tp3": 14.425849999999999,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:56.041468"
+  },
+  {
+    "symbol": "STETHUSDT",
+    "price": 3337.89,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0230",
+      "RSI Healthy: 62.9",
+      "Strong Trend ADX: 35.5",
+      "BB Rating: +1",
+      "MACD Bullish: 7.253291"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.023040186109126965,
+      "rsi": 62.92126106538266,
+      "adx": 35.48472896223533,
+      "bb_rating": "1",
+      "volume_ratio": 0.8541403402732047,
+      "price_change": -0.04940800229972231,
+      "macd": 7.253290603589903
+    },
+    "entry_plan": {
+      "entry": 3337.89,
+      "stop_loss": 3237.7533,
+      "tp1": 3488.09505,
+      "tp2": 3638.3001,
+      "tp3": 3788.50515,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:56.642378"
+  },
+  {
+    "symbol": "GALFTUSDT",
+    "price": 1.188,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0085",
+      "RSI Healthy: 61.5",
+      "Strong Trend ADX: 42.9",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000173"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.008500456665516546,
+      "rsi": 61.53846153846101,
+      "adx": 42.90970933827997,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 0.00017255598818755047
+    },
+    "entry_plan": {
+      "entry": 1.188,
+      "stop_loss": 1.1523599999999998,
+      "tp1": 1.24146,
+      "tp2": 1.2949200000000003,
+      "tp3": 1.3483800000000006,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:56.938347"
+  },
+  {
+    "symbol": "C98USDT",
+    "price": 0.03135,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0242",
+      "RSI Healthy: 55.9",
+      "Strong Trend ADX: 33.2",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000020"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.024240924667872938,
+      "rsi": 55.851063829787265,
+      "adx": 33.15565697699853,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 1.96230376977094e-05
+    },
+    "entry_plan": {
+      "entry": 0.03135,
+      "stop_loss": 0.030409500000000003,
+      "tp1": 0.032760750000000005,
+      "tp2": 0.03417150000000001,
+      "tp3": 0.03558225,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:57.458817"
+  },
+  {
+    "symbol": "ONEUSDT",
+    "price": 0.004891,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0291",
+      "RSI Healthy: 56.9",
+      "Strong Trend ADX: 51.3",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000005"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.029098283155455693,
+      "rsi": 56.89045936395765,
+      "adx": 51.33675465979577,
+      "bb_rating": "1",
+      "volume_ratio": 0.2902018957247922,
+      "price_change": -0.02044153720358599,
+      "macd": 5.37188802257442e-06
+    },
+    "entry_plan": {
+      "entry": 0.004891,
+      "stop_loss": 0.00474427,
+      "tp1": 0.005111095000000001,
+      "tp2": 0.005331190000000001,
+      "tp3": 0.005551285000000001,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:45:57.964655"
+  },
+  {
+    "symbol": "UMAUSDT",
+    "price": 0.9273,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0299",
+      "RSI Healthy: 47.8",
+      "Strong Trend ADX: 28.4",
+      "BB Rating: +1"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02985989553928135,
+      "rsi": 47.80763790664782,
+      "adx": 28.403517920271472,
+      "bb_rating": "1",
+      "volume_ratio": 0.4507136527035795,
+      "price_change": -0.4829362524146785,
+      "macd": -0.000809281657771499
+    },
+    "entry_plan": {
+      "entry": 0.9273,
+      "stop_loss": 0.899481,
+      "tp1": 0.9690285000000001,
+      "tp2": 1.0107570000000001,
+      "tp3": 1.0524855000000002,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:00.079749"
+  },
+  {
+    "symbol": "RVNUSDT",
+    "price": 0.00925,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0257",
+      "RSI Healthy: 61.5",
+      "Strong Trend ADX: 35.0",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000015"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02573257600975584,
+      "rsi": 61.53846153846147,
+      "adx": 34.988213310633306,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 1.4762206264656158e-05
+    },
+    "entry_plan": {
+      "entry": 0.00925,
+      "stop_loss": 0.0089725,
+      "tp1": 0.00966625,
+      "tp2": 0.0100825,
+      "tp3": 0.01049875,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:03.872858"
+  },
+  {
+    "symbol": "EGLDUSDT",
+    "price": 8.4,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0213",
+      "RSI Healthy: 57.5",
+      "Strong Trend ADX: 31.4",
+      "BB Rating: +1",
+      "MACD Bullish: 0.016126"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02125046209602746,
+      "rsi": 57.50000000000006,
+      "adx": 31.384750193948765,
+      "bb_rating": "1",
+      "volume_ratio": 0.105476748948211,
+      "price_change": -0.23752969121139111,
+      "macd": 0.016126038987556157
+    },
+    "entry_plan": {
+      "entry": 8.4,
+      "stop_loss": 8.148,
+      "tp1": 8.778000000000002,
+      "tp2": 9.156000000000002,
+      "tp3": 9.534000000000002,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:04.131009"
+  },
+  {
+    "symbol": "RUNEUSDT",
+    "price": 0.75,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0284",
+      "RSI Healthy: 62.2",
+      "Strong Trend ADX: 36.0",
+      "BB Rating: +1",
+      "MACD Bullish: 0.001213"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.028372701152468302,
+      "rsi": 62.16216216216216,
+      "adx": 35.963612470743406,
+      "bb_rating": "1",
+      "volume_ratio": 0.07309930430565666,
+      "price_change": -0.26595744680850686,
+      "macd": 0.0012129130002117572
+    },
+    "entry_plan": {
+      "entry": 0.75,
+      "stop_loss": 0.7275,
+      "tp1": 0.78375,
+      "tp2": 0.8174999999999999,
+      "tp3": 0.8512499999999998,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:04.382171"
+  },
+  {
+    "symbol": "ICXUSDT",
+    "price": 0.07235,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0284",
+      "RSI Healthy: 58.5",
+      "Strong Trend ADX: 28.5",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000246"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02837821624456699,
+      "rsi": 58.456973293768634,
+      "adx": 28.461470225318617,
+      "bb_rating": "1",
+      "volume_ratio": 0.08667559951682821,
+      "price_change": -0.22065921941801792,
+      "macd": 0.0002463715502566549
+    },
+    "entry_plan": {
+      "entry": 0.07235,
+      "stop_loss": 0.07017949999999999,
+      "tp1": 0.07560575,
+      "tp2": 0.07886150000000001,
+      "tp3": 0.08211725000000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:04.897272"
+  },
+  {
+    "symbol": "XDCUSDT",
+    "price": 0.0515,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0238",
+      "RSI Healthy: 54.4",
+      "Strong Trend ADX: 35.7",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000029"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.02378386539733327,
+      "rsi": 54.43037974683537,
+      "adx": 35.7203466501614,
+      "bb_rating": "1",
+      "volume_ratio": 0.004976147215190568,
+      "price_change": 0.07773027594246695,
+      "macd": 2.91102662573553e-05
+    },
+    "entry_plan": {
+      "entry": 0.0515,
+      "stop_loss": 0.04995499999999999,
+      "tp1": 0.053817500000000004,
+      "tp2": 0.05613500000000001,
+      "tp3": 0.05845250000000002,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:05.151140"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "price": 0.17159,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0213",
+      "RSI Healthy: 55.0",
+      "Strong Trend ADX: 35.4",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000347"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.021269860463786837,
+      "rsi": 55.042527339003584,
+      "adx": 35.41752101021684,
+      "bb_rating": "1",
+      "volume_ratio": 0.15851300436083124,
+      "price_change": -0.24997093361237566,
+      "macd": 0.00034744243485884674
+    },
+    "entry_plan": {
+      "entry": 0.17159,
+      "stop_loss": 0.1664423,
+      "tp1": 0.17931155,
+      "tp2": 0.1870331,
+      "tp3": 0.19475465000000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:05.920669"
+  },
+  {
+    "symbol": "FLOWUSDT",
+    "price": 0.2371,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0184",
+      "RSI Healthy: 54.0",
+      "Strong Trend ADX: 38.2",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000244"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.018385998368006976,
+      "rsi": 54.02298850574716,
+      "adx": 38.19772993692904,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 0.00024395716908476306
+    },
+    "entry_plan": {
+      "entry": 0.2371,
+      "stop_loss": 0.229987,
+      "tp1": 0.24776950000000003,
+      "tp2": 0.25843900000000003,
+      "tp3": 0.26910850000000003,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:06.161117"
+  },
+  {
+    "symbol": "STXUSDT",
+    "price": 0.355,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0163",
+      "RSI Healthy: 52.6",
+      "Strong Trend ADX: 35.1",
+      "BB Rating: +1"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.01626692743962211,
+      "rsi": 52.631578947368425,
+      "adx": 35.10513296227582,
+      "bb_rating": "1",
+      "volume_ratio": 0.06910908953298298,
+      "price_change": -0.2808988764044895,
+      "macd": -0.0001511752563510549
+    },
+    "entry_plan": {
+      "entry": 0.355,
+      "stop_loss": 0.34435,
+      "tp1": 0.37097499999999994,
+      "tp2": 0.38694999999999996,
+      "tp3": 0.402925,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:06.655765"
+  },
+  {
+    "symbol": "SIDUSUSDT",
+    "price": 0.0002964,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0136",
+      "RSI Healthy: 60.4",
+      "Strong Trend ADX: 42.1",
+      "BB Rating: +1"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.01363131939939207,
+      "rsi": 60.41666666666669,
+      "adx": 42.12914279278049,
+      "bb_rating": "1",
+      "volume_ratio": 0.6853156770763115,
+      "price_change": 0.3045685279187804,
+      "macd": -9.8608501740839e-07
+    },
+    "entry_plan": {
+      "entry": 0.0002964,
+      "stop_loss": 0.000287508,
+      "tp1": 0.00030973799999999994,
+      "tp2": 0.00032307599999999994,
+      "tp3": 0.00033641399999999994,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:06.916156"
+  },
+  {
+    "symbol": "GMXUSDT",
+    "price": 8.92,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0265",
+      "RSI Healthy: 51.7",
+      "Strong Trend ADX: 29.4",
+      "BB Rating: +1",
+      "MACD Bullish: 0.028940"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.026507335164688492,
+      "rsi": 51.66666666666663,
+      "adx": 29.35684341803389,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 0.028939791464113185
+    },
+    "entry_plan": {
+      "entry": 8.92,
+      "stop_loss": 8.6524,
+      "tp1": 9.3214,
+      "tp2": 9.7228,
+      "tp3": 10.124199999999998,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:08.207392"
+  },
+  {
+    "symbol": "BTTUSDT",
+    "price": 4.242e-07,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0098",
+      "RSI Healthy: 57.5",
+      "Strong Trend ADX: 41.0",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000000"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.009774010177229859,
+      "rsi": 57.47126436781612,
+      "adx": 40.998070445346,
+      "bb_rating": "1",
+      "volume_ratio": 0.21911246971370196,
+      "price_change": -0.14124293785310327,
+      "macd": 4.4390152801814316e-11
+    },
+    "entry_plan": {
+      "entry": 4.242e-07,
+      "stop_loss": 4.1147399999999997e-07,
+      "tp1": 4.4328900000000007e-07,
+      "tp2": 4.623780000000001e-07,
+      "tp3": 4.814670000000001e-07,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:09.242940"
+  },
+  {
+    "symbol": "NFTUSDT",
+    "price": 3.977e-07,
+    "confidence": 5,
+    "signals": [
+      "BB Squeeze: 0.0148",
+      "RSI Healthy: 58.0",
+      "Strong Trend ADX: 36.3",
+      "BB Rating: +1",
+      "MACD Bullish: 0.000000"
+    ],
+    "warnings": [],
+    "indicators": {
+      "bbw": 0.014759136126861269,
+      "rsi": 58.000000000000064,
+      "adx": 36.32977696928954,
+      "bb_rating": "1",
+      "volume_ratio": 0.0,
+      "price_change": 0.0,
+      "macd": 4.979391507129687e-10
+    },
+    "entry_plan": {
+      "entry": 3.977e-07,
+      "stop_loss": 3.85769e-07,
+      "tp1": 4.155965e-07,
+      "tp2": 4.3349300000000003e-07,
+      "tp3": 4.5138950000000006e-07,
+      "risk_pct": 3.0,
+      "reward_ratio": 3.0
+    },
+    "timestamp": "2025-11-05T21:46:09.754956"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "exchange": "BINANCE",
+  "timeframes": ["15m", "1h", "4h"],
+  "capital": 1000.0,
+
+  "risk_config": {
+    "capital": 1000.0,
+    "max_risk_per_trade": 2.0,
+    "max_positions": 3,
+    "max_daily_loss": 6.0,
+    "max_drawdown": 15.0
+  },
+
+  "breakout_config": {
+    "bbw_threshold": 0.03,
+    "volume_multiplier": 2.0,
+    "rsi_min": 30,
+    "rsi_max": 70,
+    "risk_reward": 3.0,
+    "position_size": 2.0
+  },
+
+  "scanner_config": {
+    "scan_limit": 50,
+    "min_volume": 100000,
+    "min_signal_strength": 6
+  },
+
+  "custom_config": {
+    "rsi_oversold": 30,
+    "rsi_overbought": 70,
+    "volume_multiplier": 3.0,
+    "bbw_max": 0.05,
+    "min_change": 2.0,
+    "risk_reward": 2.5,
+    "position_size": 2.5
+  }
+}
