@@ -12,13 +12,16 @@ import sys
 from datetime import datetime
 from typing import Optional
 
+if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 # ── Path setup ──────────────────────────────────────────────────────
 _SYSTEM = os.path.join(os.path.dirname(__file__), '..', 'crypto-trading-system')
-sys.path.insert(0, _SYSTEM)
+sys.path.append(_SYSTEM)
 
 SCANNER_AVAILABLE = False
 SCANNER_ERROR = ""
@@ -199,4 +202,4 @@ if __name__ == "__main__":
     print(f"  Scanner : {'OK' if SCANNER_AVAILABLE else 'UNAVAILABLE — ' + SCANNER_ERROR}")
     print(f"  API     : http://localhost:8000")
     print(f"  Docs    : http://localhost:8000/docs\n")
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

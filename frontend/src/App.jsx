@@ -8,8 +8,11 @@ import { useScan }  from './hooks/useScan.js'
 
 // ── trade setups helper ──────────────────────────────────────────────────────
 function TradeTab({ signals }) {
-  const setups = signals.filter(s => s.bbw < 0.03 && parseInt(s.bb_rating) >= 2 && s.direction === 'LONG' && s.confidence >= 6)
+  const longSetups = signals.filter(s => s.bbw < 0.05 && parseInt(s.bb_rating) >= 1 && s.direction === 'LONG' && s.confidence >= 5)
     .sort((a, b) => b.confidence - a.confidence)
+  const shortSetups = signals.filter(s => s.bbw < 0.05 && parseInt(s.bb_rating) <= -1 && s.direction === 'SHORT' && s.confidence >= 5)
+    .sort((a, b) => b.confidence - a.confidence)
+  const setups = [...longSetups, ...shortSetups]
 
   function fmtP(p) {
     if (!p) return '—'
@@ -17,7 +20,9 @@ function TradeTab({ signals }) {
   }
   function rr(s) {
     if (!s.tp1 || !s.price || !s.stop_loss) return '—'
-    return ((s.tp1 - s.price) / (s.price - s.stop_loss)).toFixed(1) + 'R'
+    if (s.direction === 'LONG')
+      return ((s.tp1 - s.price) / (s.price - s.stop_loss)).toFixed(1) + 'R'
+    return ((s.price - s.tp1) / (s.stop_loss - s.price)).toFixed(1) + 'R'
   }
 
   return (
@@ -25,24 +30,25 @@ function TradeTab({ signals }) {
       <div className="left-panel">
         <div className="panel-head">
           <span className="panel-title">Breakout Setups</span>
-          <span className="panel-count">{setups.length} setups</span>
+          <span className="panel-count">{longSetups.length} LONG · {shortSetups.length} SHORT</span>
         </div>
         <div className="tbl-scroll">
           <table>
             <thead>
               <tr>
-                <th>Symbol</th><th>Confidence</th><th>Entry</th>
-                <th>Stop Loss</th><th>TP1</th><th>TP2</th><th>TP3</th><th>R:R</th>
+                <th>Symbol</th><th>Dir</th><th>Confidence</th><th>Entry</th>
+                <th>Stop Loss</th><th>TP1</th><th>TP2</th><th>R:R</th>
               </tr>
             </thead>
             <tbody>
               {setups.length === 0 ? (
                 <tr><td colSpan={8}>
-                  <div className="empty"><div className="empty-icon">◈</div><span>Run scan first</span></div>
+                  <div className="empty"><div className="empty-icon">◈</div><span>{signals.length === 0 ? 'Run scan first' : 'No setups match criteria'}</span></div>
                 </td></tr>
-              ) : setups.map(s => (
-                <tr key={s.symbol}>
+              ) : setups.map((s, idx) => (
+                <tr key={s.symbol + s.direction + idx}>
                   <td><span className="sym">{s.symbol?.replace(/USDT$/,'')}<span className="sym-q">/USDT</span></span></td>
+                  <td><span className={`dir-badge ${s.direction === 'LONG' ? 'long' : 'short'}`}>{s.direction}</span></td>
                   <td>
                     <div className="conf-wrap">
                       {Array.from({length:10},(_,i)=><div key={i} className={`conf-dot ${i < s.confidence ? 'lit':''}`}/>)}
@@ -53,7 +59,6 @@ function TradeTab({ signals }) {
                   <td style={{ fontSize: 10, color: 'var(--r2)' }}>{fmtP(s.stop_loss)}</td>
                   <td style={{ fontSize: 10, color: 'var(--g1)' }}>{fmtP(s.tp1)}</td>
                   <td style={{ fontSize: 10, color: 'var(--g2)' }}>{fmtP(s.tp2)}</td>
-                  <td style={{ fontSize: 10, color: 'var(--g3)' }}>{fmtP(s.tp3)}</td>
                   <td style={{ fontFamily: 'var(--fd)', fontSize: 11, fontWeight: 600, color: 'var(--cyan)' }}>{rr(s)}</td>
                 </tr>
               ))}
@@ -67,11 +72,11 @@ function TradeTab({ signals }) {
           <div className="r-title">Strategy Info</div>
           <div style={{ fontSize: 10, color: 'var(--tx-2)', lineHeight: 1.8 }}>
             <div style={{ color: 'var(--purple)', fontFamily: 'var(--fd)', fontSize: 11, fontWeight: 600, letterSpacing: 2, marginBottom: 8 }}>BB SQUEEZE + BREAKOUT</div>
-            Quét coin đang trong trạng thái squeeze (BBW &lt; 3%), BB Rating ≥ +2, confidence ≥ 6/10.
+            Quét coin đang trong trạng thái squeeze (BBW &lt; 5%), BB Rating ≥ +1 (LONG) hoặc ≤ -1 (SHORT), confidence ≥ 5/10.
             Entry tại giá hiện tại, SL -3%, TP theo R:R 1.5/2.5/3.5.
           </div>
           <div className="strat-kpi">
-            {[['WIN RATE','64%','var(--g2)'],['AVG R:R','2.5','var(--cyan)'],['MIN CONF','6/10','var(--amber)']].map(([l,v,c]) => (
+            {[['WIN RATE','64%','var(--g2)'],['AVG R:R','2.5','var(--cyan)'],['MIN CONF','5/10','var(--amber)']].map(([l,v,c]) => (
               <div key={l} className="strat-kpi-card">
                 <div className="skpi-lbl">{l}</div>
                 <div className="skpi-val" style={{color:c}}>{v}</div>

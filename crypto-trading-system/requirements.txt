@@ -1,5 +1,4 @@
 # Core dependencies
-python>=3.10
 
 # TradingView Data
 tradingview-screener>=0.6.4

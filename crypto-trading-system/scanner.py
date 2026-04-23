@@ -279,16 +279,26 @@ def _build_signal(direction: str, ind: dict, metrics: dict, symbol: str, exchang
 def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[Signal]:
     symbols = load_symbols(exchange)
     if not symbols:
+        print(f"  [!] No symbols found for exchange: {exchange}")
         return []
     symbols = symbols[:max_symbols]
     screener = EXCHANGE_SCREENER.get(exchange, "crypto")
     signals: list[Signal] = []
+    empty_count = 0
 
     for i in range(0, len(symbols), 200):
         batch = symbols[i:i + 200]
         try:
             analysis = get_multiple_analysis(screener=screener, interval=timeframe, symbols=batch)
-        except Exception:
+        except Exception as e:
+            print(f"  [!] TradingView API error (batch {i//200+1}): {e}")
+            continue
+
+        # Check for rate limiting: if most symbols return None, TV is throttling
+        batch_empty = sum(1 for v in analysis.values() if v is None)
+        empty_count += batch_empty
+        if batch_empty == len(batch):
+            print(f"  [!] Rate limited: TradingView returned 0/{len(batch)} symbols. Wait 5-10 min.")
             continue
 
         for sym, data in analysis.items():
@@ -319,7 +329,8 @@ def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[S
                     if sig:
                         signals.append(sig)
 
-            except Exception:
+            except Exception as e:
+                print(f"  [!] Error scoring {sym}: {type(e).__name__}: {e}")
                 continue
 
     return signals
@@ -342,7 +353,7 @@ def run_scan(exchanges: list[str] = None, timeframes: list[str] = None) -> list[
 
     for exchange in exchanges:
         for tf in timeframes:
-            print(f"  ⏳ Scanning {exchange.upper()} {tf}...")
+            print(f"  [*] Scanning {exchange.upper()} {tf}...")
             sigs = _batch_scan(exchange, tf)
             for s in sigs:
                 key = f"{s.symbol}_{s.direction}"
@@ -462,24 +473,24 @@ if __name__ == "__main__":
     short_sigs = [s for s in signals if s.direction == "SHORT"]
 
     print(f"\n{'='*60}")
-    print(f"  🟢 LONG ({len(long_sigs)})")
+    print(f"  [+] LONG ({len(long_sigs)})")
     print(f"{'='*60}")
     for s in long_sigs:
-        gold = " 💎" if s.golden_cross else ""
+        gold = " (Golden)" if s.golden_cross else ""
         print(f"  {s.symbol:<15} TF:{s.timeframe:<4} C:{s.confidence}/10  Q:{s.quality}/15"
               f"  BBW:{s.bbw:.3f}  RSI:{s.rsi:.0f}  SL:{s.stop_loss:.6g}  TP1:{s.tp1:.6g}{gold}")
-        print(f"    ↳ {' | '.join(s.reasons[:3])}")
+        print(f"    -> {' | '.join(s.reasons[:3])}")
 
     print(f"\n{'='*60}")
-    print(f"  🔴 SHORT ({len(short_sigs)})")
+    print(f"  [-] SHORT ({len(short_sigs)})")
     print(f"{'='*60}")
     for s in short_sigs:
         print(f"  {s.symbol:<15} TF:{s.timeframe:<4} C:{s.confidence}/10  Q:{s.quality}/15"
               f"  BBW:{s.bbw:.3f}  RSI:{s.rsi:.0f}  SL:{s.stop_loss:.6g}  TP1:{s.tp1:.6g}")
-        print(f"    ↳ {' | '.join(s.reasons[:3])}")
+        print(f"    -> {' | '.join(s.reasons[:3])}")
 
     if not args.no_report:
         path = save_report(signals)
-        print(f"\n✅ Report: {path}")
+        print(f"\n[OK] Report: {path}")
     else:
-        print(f"\n✅ Tổng: {len(signals)} tín hiệu")
+        print(f"\n[OK] Tổng: {len(signals)} tín hiệu")
