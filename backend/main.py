@@ -44,6 +44,10 @@ app.add_middleware(
 _CACHE = os.path.join(os.path.dirname(__file__), 'cache', 'latest_scan.json')
 os.makedirs(os.path.dirname(_CACHE), exist_ok=True)
 
+# ── Rate-limit protection ────────────────────────────────────────────
+_SCAN_COOLDOWN_SEC = 30          # minimum seconds between scans
+_last_scan_time: Optional[datetime] = None
+
 # ── Schemas ──────────────────────────────────────────────────────────
 class ScanRequest(BaseModel):
     exchanges: list[str] = ["bybit"]
@@ -83,8 +87,23 @@ def health():
 
 @app.post("/api/scan")
 def scan(req: ScanRequest):
+    global _last_scan_time
+
     if not SCANNER_AVAILABLE:
         raise HTTPException(503, f"Scanner unavailable: {SCANNER_ERROR}")
+
+    # ── Cooldown check: prevent TradingView rate limiting ──
+    now = datetime.now()
+    if _last_scan_time:
+        elapsed = (now - _last_scan_time).total_seconds()
+        if elapsed < _SCAN_COOLDOWN_SEC:
+            cached = _load_cache()
+            if cached:
+                wait = int(_SCAN_COOLDOWN_SEC - elapsed)
+                cached["_notice"] = f"Cooldown: returning cached data. Try again in {wait}s to avoid TradingView rate limit."
+                cached["_from_cache"] = True
+                return cached
+    _last_scan_time = now
 
     signals = run_scan(exchanges=req.exchanges, timeframes=req.timeframes)
     filtered = [s for s in signals if s.confidence >= req.min_confidence]
@@ -98,7 +117,16 @@ def scan(req: ScanRequest):
         "long_count":  sum(1 for s in filtered if s.direction == "LONG"),
         "short_count": sum(1 for s in filtered if s.direction == "SHORT"),
         "signals": [s.to_dict() for s in filtered],
+        "_from_cache": False,
     }
+
+    # ── If scan returned 0 results, likely rate-limited → return cache ──
+    if len(signals) == 0:
+        cached = _load_cache()
+        if cached and cached.get("total_signals", 0) > 0:
+            cached["_notice"] = "TradingView returned 0 results (rate limited). Showing last successful scan."
+            cached["_from_cache"] = True
+            return cached
 
     _save_cache(result)
 

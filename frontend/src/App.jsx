@@ -133,7 +133,11 @@ export default function App() {
   async function handleScan() {
     const data = await scan({ exchanges: [exchange], timeframes: [tf, '1h', '4h'] })
     if (data) {
-      showToast(`Scanned ${data.total_scanned} symbols · ${data.total_signals} signals found`)
+      if (data._from_cache) {
+        showToast(data._notice || `Showing cached data (${data.total_signals} signals). Wait 30s before next scan.`)
+      } else {
+        showToast(`Scanned ${data.total_scanned} symbols · ${data.total_signals} signals found`)
+      }
     }
   }
 
