@@ -48,13 +48,15 @@ cache/
 # Project specific
 backend/venv/
 backend/__pycache__/
+backend/cache/
 crypto-trading-system/__pycache__/
 crypto-trading-system/logs/
+crypto-trading-system/.venv/
 frontend/node_modules/
 frontend/dist/
-web-ui/node_modules/
-web-ui/venv/
-web-ui/dist/
 tradingview-mcp/.venv/
 tradingview-mcp/dist/
 tradingview-mcp/__pycache__/
+
+# Scan reports (keep local only)
+reports/
