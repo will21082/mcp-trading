@@ -3,7 +3,7 @@ Unit Tests - scanner module
 Tests: Signal dataclass, _score_long, _score_short, _build_signal
 """
 import pytest
-from scanner import Signal, _score_long, _score_short, _build_signal
+from core.scanner import Signal, _score_long, _score_short, _build_signal
 
 
 class TestSignalDataclass:
@@ -60,7 +60,7 @@ class TestScoreLong:
 
 class TestScoreShort:
     def test_bearish(self):
-        ind = {"RSI": 75.0, "EMA50": 110.0, "EMA200": 115.0,
+        ind = {"RSI": 50.0, "EMA50": 110.0, "EMA200": 115.0,
                "ADX": 30.0, "MACD.macd": -2.0, "MACD.signal": -0.5,
                "close": 95.0, "volume": 500_000}
         c, q, _, _ = _score_short(ind, {"rating": -3, "bbw": 0.015})

@@ -72,8 +72,8 @@ function TradeTab({ signals }) {
           <div className="r-title">Strategy Info</div>
           <div style={{ fontSize: 10, color: 'var(--tx-2)', lineHeight: 1.8 }}>
             <div style={{ color: 'var(--purple)', fontFamily: 'var(--fd)', fontSize: 11, fontWeight: 600, letterSpacing: 2, marginBottom: 8 }}>BB SQUEEZE + BREAKOUT</div>
-            Quét coin đang trong trạng thái squeeze (BBW &lt; 5%), BB Rating ≥ +1 (LONG) hoặc ≤ -1 (SHORT), confidence ≥ 5/10.
-            Entry tại giá hiện tại, SL -3%, TP theo R:R 1.5/2.5/3.5.
+            Scan coins currently in squeeze state (BBW &lt; 5%), BB Rating ≥ +1 (LONG) or ≤ -1 (SHORT), confidence ≥ 5/10.
+            Entry at current price, SL -3%, TP based on R:R 1.5/2.5/3.5.
           </div>
           <div className="strat-kpi">
             {[['WIN RATE','64%','var(--g2)'],['AVG R:R','2.5','var(--cyan)'],['MIN CONF','5/10','var(--amber)']].map(([l,v,c]) => (
@@ -87,9 +87,9 @@ function TradeTab({ signals }) {
         <div className="r-section">
           <div className="r-title">Exit Plan</div>
           {[
-            ['TP1 (70%)', '+4.5% · đóng 70% vị thế'],
-            ['TP2 (30%)', '+7.5% · đóng 30% còn lại'],
-            ['Stop Loss', '-3% từ entry'],
+            ['TP1 (70%)', '+4.5% · close 70% position'],
+            ['TP2 (30%)', '+7.5% · close remaining 30%'],
+            ['Stop Loss', '-3% from entry'],
             ['Max Hold',  '6h (15m/1h) · 48h (4h)'],
           ].map(([l,v]) => (
             <div key={l} className="perf-row">
@@ -175,7 +175,7 @@ export default function App() {
           <div className="backend-banner" style={{ gridColumn: '1/-1' }}>
             <div className="backend-title">⚠ BACKEND OFFLINE</div>
             <div className="backend-cmd">cd backend && pip install -r requirements.txt && uvicorn main:app --reload --port 8000</div>
-            <div className="backend-hint">Frontend chạy trên port 5173 · Backend cần port 8000</div>
+            <div className="backend-hint">Frontend runs on port 5173 · Backend requires port 8000</div>
           </div>
         )}
 

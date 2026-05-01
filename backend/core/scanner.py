@@ -1,8 +1,8 @@
 """
 Unified Crypto Scanner
 ----------------------
-Chiến lược duy nhất: BB Squeeze + Multi-timeframe confirmation
-Exit: 70% tại TP1, 30% tại TP2 | SL: -3% | Max hold: 6h (15m/1h) hoặc 48h (4h)
+Core Strategy: BB Squeeze + Multi-timeframe confirmation
+Exit: 70% at TP1, 30% at TP2 | SL: -3% | Max hold depends on timeframe
 """
 from __future__ import annotations
 
@@ -12,14 +12,14 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'tradingview-mcp', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'tradingview-mcp', 'src'))
 
 from tradingview_mcp.core.services.coinlist import load_symbols
 from tradingview_mcp.core.services.indicators import compute_metrics
 from tradingview_mcp.core.utils.validators import EXCHANGE_SCREENER
 from tradingview_ta import get_multiple_analysis
 
-REPORT_DIR = os.path.join(os.path.dirname(__file__), '..', 'reports')
+REPORT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'reports')
 os.makedirs(REPORT_DIR, exist_ok=True)
 
 
@@ -90,7 +90,7 @@ class Signal:
 
 # ── Scoring engine ────────────────────────────────────────────────────────────
 
-def _score_long(ind: dict, metrics: dict) -> tuple[int, int, list, list]:
+def _score_long(ind: dict, metrics: dict, timeframe: str = "15m") -> tuple[int, int, list, list]:
     """Trả về (confidence, quality, reasons, warnings)."""
     c, q, reasons, warnings = 0, 0, [], []
 
@@ -105,7 +105,21 @@ def _score_long(ind: dict, metrics: dict) -> tuple[int, int, list, list]:
     close     = ind.get('close', 0) or 0
     volume    = ind.get('volume', 0) or 0
 
-    # 1. BB Rating — bắt buộc dương
+    # --- HARD FILTERS ---
+    quote_vol = close * volume
+    if quote_vol < 160_000:
+        return -1, -1, [], []  # Ignore low liquidity < $160k
+
+    is_scalp = timeframe in ("1m", "3m", "5m", "15m")
+    if is_scalp:
+        if bbw > 0.06: return -1, -1, [], []  # Max BBW for Scalp (0.06)
+        if rsi < 35 or rsi > 75: return -1, -1, [], []  # RSI bounds
+    else:
+        if ema200 and close < ema200: return -1, -1, [], []  # Trend must be bullish
+        if bbw > 0.09: return -1, -1, [], []  # Max BBW for Swing (0.09)
+    # --------------------
+
+    # 1. BB Rating — Must be positive
     if bb_rating >= 3:
         c += 5; q += 4; reasons.append(f"🔥 BB Rating +{bb_rating} EXTREME BUY")
     elif bb_rating == 2:
@@ -158,7 +172,7 @@ def _score_long(ind: dict, metrics: dict) -> tuple[int, int, list, list]:
     return min(c, 10), min(q, 15), reasons, warnings
 
 
-def _score_short(ind: dict, metrics: dict) -> tuple[int, int, list, list]:
+def _score_short(ind: dict, metrics: dict, timeframe: str = "15m") -> tuple[int, int, list, list]:
     """Trả về (confidence, quality, reasons, warnings)."""
     c, q, reasons, warnings = 0, 0, [], []
 
@@ -173,7 +187,21 @@ def _score_short(ind: dict, metrics: dict) -> tuple[int, int, list, list]:
     close     = ind.get('close', 0) or 0
     volume    = ind.get('volume', 0) or 0
 
-    # 1. BB Rating — bắt buộc âm
+    # --- HARD FILTERS ---
+    quote_vol = close * volume
+    if quote_vol < 160_000:
+        return -1, -1, [], []  # Ignore low liquidity < $160k
+
+    is_scalp = timeframe in ("1m", "3m", "5m", "15m")
+    if is_scalp:
+        if bbw > 0.06: return -1, -1, [], []  # Max BBW for Scalp
+        if rsi < 25 or rsi > 65: return -1, -1, [], []  # RSI bounds
+    else:
+        if ema200 and close > ema200: return -1, -1, [], []  # Trend must be bearish
+        if bbw > 0.09: return -1, -1, [], []  # Max BBW for Swing
+    # --------------------
+
+    # 1. BB Rating — Must be negative
     if bb_rating <= -3:
         c += 5; q += 4; reasons.append(f"🔥 BB Rating {bb_rating} EXTREME SELL")
     elif bb_rating == -2:
@@ -248,7 +276,10 @@ def _build_signal(direction: str, ind: dict, metrics: dict, symbol: str, exchang
 
     rr = (risk * 2.5) / risk if risk > 0 else 0  # based on TP2
 
-    max_hold = 6 if tf in ("15m", "1h") else 48
+    if tf in ("1m", "3m", "5m"): max_hold = 2
+    elif tf in ("15m", "30m"): max_hold = 6
+    elif tf in ("1h", "2h", "4h"): max_hold = 24
+    else: max_hold = 72
 
     return Signal(
         symbol=symbol,
@@ -281,6 +312,13 @@ def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[S
     if not symbols:
         print(f"  [!] No symbols found for exchange: {exchange}")
         return []
+        
+    # Map to valid TradingView intervals to prevent API ignoring invalid formats
+    tv_map = {"1m": "1m", "3m": "3m", "5m": "5m", "15m": "15m", "30m": "30m",
+              "1h": "1h", "2h": "2h", "4h": "4h", 
+              "1d": "1d", "1D": "1d", "1w": "1W", "1W": "1W", "1m": "1M"}
+    api_interval = tv_map.get(timeframe, timeframe)
+    
     symbols = symbols[:max_symbols]
     screener = EXCHANGE_SCREENER.get(exchange, "crypto")
     signals: list[Signal] = []
@@ -289,7 +327,7 @@ def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[S
     for i in range(0, len(symbols), 200):
         batch = symbols[i:i + 200]
         try:
-            analysis = get_multiple_analysis(screener=screener, interval=timeframe, symbols=batch)
+            analysis = get_multiple_analysis(screener=screener, interval=api_interval, symbols=batch)
         except Exception as e:
             print(f"  [!] TradingView API error (batch {i//200+1}): {e}")
             continue
@@ -313,7 +351,7 @@ def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[S
                 clean_sym = sym.split(":")[1] if ":" in sym else sym
 
                 # Try LONG
-                c, q, reasons, warnings = _score_long(ind, metrics)
+                c, q, reasons, warnings = _score_long(ind, metrics, timeframe)
                 if c >= 5 and q >= 4:
                     sig = _build_signal("LONG", ind, metrics, clean_sym, exchange, timeframe,
                                         c, q, reasons, warnings)
@@ -322,7 +360,7 @@ def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[S
                         continue  # don't double-count same coin as SHORT
 
                 # Try SHORT
-                c, q, reasons, warnings = _score_short(ind, metrics)
+                c, q, reasons, warnings = _score_short(ind, metrics, timeframe)
                 if c >= 5 and q >= 4:
                     sig = _build_signal("SHORT", ind, metrics, clean_sym, exchange, timeframe,
                                         c, q, reasons, warnings)
@@ -340,13 +378,17 @@ def _batch_scan(exchange: str, timeframe: str, max_symbols: int = 400) -> list[S
 
 def run_scan(exchanges: list[str] = None, timeframes: list[str] = None) -> list[Signal]:
     """
-    Chạy scan trên các sàn/timeframe được chọn.
-    Mặc định: Bybit trên 15m + 1h + 4h.
+    Run scan on selected exchanges and timeframes.
+    Default: Bybit on 15m + 1h + 4h.
     """
     if exchanges is None:
         exchanges = ["bybit"]
     if timeframes is None:
         timeframes = ["15m", "1h", "4h"]
+        
+    # Remove duplicate timeframes (e.g. ['1h', '1h'])
+    exchanges = list(dict.fromkeys(exchanges))
+    timeframes = list(dict.fromkeys(timeframes))
 
     all_signals: list[Signal] = []
     seen: set[str] = set()
@@ -356,18 +398,11 @@ def run_scan(exchanges: list[str] = None, timeframes: list[str] = None) -> list[
             print(f"  [*] Scanning {exchange.upper()} {tf}...")
             sigs = _batch_scan(exchange, tf)
             for s in sigs:
-                key = f"{s.symbol}_{s.direction}"
-                # Prefer higher timeframe signal if same coin+direction seen
+                # Gộp theo coin + chiều + khung giờ để không bị mất kết quả của các khung khác nhau
+                key = f"{s.symbol}_{s.direction}_{s.timeframe}"
                 if key not in seen:
                     all_signals.append(s)
                     seen.add(key)
-                else:
-                    # Replace with higher-TF version (4h > 1h > 15m)
-                    tf_rank = {"15m": 0, "1h": 1, "4h": 2}
-                    existing_idx = next(i for i, x in enumerate(all_signals)
-                                        if f"{x.symbol}_{x.direction}" == key)
-                    if tf_rank.get(tf, 0) > tf_rank.get(all_signals[existing_idx].timeframe, 0):
-                        all_signals[existing_idx] = s
 
     # Sort: LONG first by quality desc, then SHORT by quality desc
     long_sigs  = sorted([s for s in all_signals if s.direction == "LONG"],
@@ -390,17 +425,17 @@ def _fmt_signal_md(s: Signal, idx: int) -> str:
 | **Exchange / TF** | {s.exchange.upper()} · {s.timeframe} |
 | **Entry** | `{s.price:.6g}` |
 | **Stop Loss** | `{s.stop_loss:.6g}` ({s.sl_pct:.1f}%) |
-| **TP1** (đóng 70%) | `{s.tp1:.6g}` ({s.tp1_pct_gain:+.1f}%) |
-| **TP2** (đóng 30%) | `{s.tp2:.6g}` |
-| **TP3** (tùy chọn) | `{s.tp3:.6g}` |
+| **TP1** (close 70%) | `{s.tp1:.6g}` ({s.tp1_pct_gain:+.1f}%) |
+| **TP2** (close 30%) | `{s.tp2:.6g}` |
+| **TP3** (optional) | `{s.tp3:.6g}` |
 | **R:R** | {s.risk_reward:.1f}x |
 | **Confidence** | {s.confidence}/10 · Quality {s.quality}/15 |
 | **BBW** | {s.bbw:.4f} · BB Rating {s.bb_rating:+d} |
 | **RSI** | {s.rsi:.1f} · ADX {s.adx:.1f} |
 | **Max Hold** | {s.max_hold_hours}h |
 
-**Lý do:** {', '.join(s.reasons)}
-{"**Cảnh báo:** " + ', '.join(s.warnings) if s.warnings else ""}
+**Reasons:** {', '.join(s.reasons)}
+{"**Warnings:** " + ', '.join(s.warnings) if s.warnings else ""}
 
 """
 
@@ -412,11 +447,11 @@ def save_report(signals: list[Signal]) -> str:
     long_sigs  = [s for s in signals if s.direction == "LONG"]
     short_sigs = [s for s in signals if s.direction == "SHORT"]
 
-    lines = [f"""# 📊 Báo Cáo Scan — {now.strftime('%Y-%m-%d %H:%M:%S')}
+    lines = [f"""# 📊 Scan Report — {now.strftime('%Y-%m-%d %H:%M:%S')}
 
-> **Chiến lược:** BB Squeeze + Multi-TF Confirmation
-> **Exit:** 70% tại TP1 · 30% tại TP2 · SL -3%
-> **Tổng tín hiệu:** {len(long_sigs)} LONG · {len(short_sigs)} SHORT
+> **Strategy:** BB Squeeze + Multi-TF Confirmation
+> **Exit:** 70% at TP1 · 30% at TP2 · SL -3%
+> **Total Signals:** {len(long_sigs)} LONG · {len(short_sigs)} SHORT
 
 ---
 
@@ -428,7 +463,7 @@ def save_report(signals: list[Signal]) -> str:
         for i, s in enumerate(long_sigs, 1):
             lines.append(_fmt_signal_md(s, i))
     else:
-        lines.append("_Không có tín hiệu LONG đủ điều kiện._\n")
+        lines.append("_No eligible LONG signals found._\n")
 
     lines.append(f"\n---\n\n## 🔴 SHORT Signals ({len(short_sigs)})\n\n")
 
@@ -436,12 +471,12 @@ def save_report(signals: list[Signal]) -> str:
         for i, s in enumerate(short_sigs, 1):
             lines.append(_fmt_signal_md(s, i))
     else:
-        lines.append("_Không có tín hiệu SHORT đủ điều kiện._\n")
+        lines.append("_No eligible SHORT signals found._\n")
 
     lines.append("""
 ---
 
-> ⚠️ Luôn xác nhận thêm trước khi vào lệnh. Quản lý vốn: không quá 3% tài khoản mỗi lệnh.
+> ⚠️ Always confirm before entering trades. Risk Management: Do not risk more than 3% per trade.
 """)
 
     content = "\n".join(lines)
@@ -457,14 +492,14 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Crypto Scanner")
-    parser.add_argument("--exchanges", nargs="+", default=["bybit"], help="Sàn giao dịch")
+    parser.add_argument("--exchanges", nargs="+", default=["bybit"], help="Exchanges")
     parser.add_argument("--timeframes", nargs="+", default=["15m", "1h", "4h"], help="Timeframes")
-    parser.add_argument("--no-report", action="store_true", help="Không lưu file report")
+    parser.add_argument("--no-report", action="store_true", help="Do not save report file")
     args = parser.parse_args()
 
     print(f"\n{'='*60}")
     print(f"  CRYPTO SCANNER — {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"  Sàn: {', '.join(args.exchanges).upper()} | TF: {', '.join(args.timeframes)}")
+    print(f"  Exchange: {', '.join(args.exchanges).upper()} | TF: {', '.join(args.timeframes)}")
     print(f"{'='*60}\n")
 
     signals = run_scan(exchanges=args.exchanges, timeframes=args.timeframes)
@@ -493,4 +528,4 @@ if __name__ == "__main__":
         path = save_report(signals)
         print(f"\n[OK] Report: {path}")
     else:
-        print(f"\n[OK] Tổng: {len(signals)} tín hiệu")
+        print(f"\n[OK] Total: {len(signals)} signals")

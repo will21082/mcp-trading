@@ -1,9 +1,0 @@
-
-# ==========================================
-# Crypto Auto Scanner - Optimized Strategy
-# Added: Mon Nov  3 00:18:36 JST 2025
-# ==========================================
-0 8 * * * /Users/will208/Desktop/MCP Trading /crypto-trading-system/scripts/auto_scan.sh >> /Users/will208/Desktop/MCP Trading /crypto-trading-system/logs/cron.log 2>&1  # Morning scan
-0 14 * * * /Users/will208/Desktop/MCP Trading /crypto-trading-system/scripts/auto_scan.sh >> /Users/will208/Desktop/MCP Trading /crypto-trading-system/logs/cron.log 2>&1  # Afternoon scan (BEST!)
-0 20 * * * /Users/will208/Desktop/MCP Trading /crypto-trading-system/scripts/auto_scan.sh >> /Users/will208/Desktop/MCP Trading /crypto-trading-system/logs/cron.log 2>&1  # Evening scan
-0 2 * * * /Users/will208/Desktop/MCP Trading /crypto-trading-system/scripts/auto_scan.sh >> /Users/will208/Desktop/MCP Trading /crypto-trading-system/logs/cron.log 2>&1  # Night scan

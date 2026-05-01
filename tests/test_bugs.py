@@ -5,7 +5,7 @@ These tests focus on logic errors, boundary conditions, and hidden issues.
 import pytest
 import sys
 import io
-from scanner import Signal, _score_long, _score_short, _build_signal
+from core.scanner import Signal, _score_long, _score_short, _build_signal
 from tradingview_mcp.core.services.indicators import compute_metrics, compute_bbw
 
 

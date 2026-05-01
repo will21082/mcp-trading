@@ -8,10 +8,9 @@ import pytest
 # ── Path setup so tests can import project modules ────────────────────────
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BACKEND = os.path.join(ROOT, "backend")
-CRYPTO_SYSTEM = os.path.join(ROOT, "crypto-trading-system")
 TV_MCP_SRC = os.path.join(ROOT, "tradingview-mcp", "src")
 
-for p in [BACKEND, CRYPTO_SYSTEM, TV_MCP_SRC]:
+for p in [BACKEND, TV_MCP_SRC]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
