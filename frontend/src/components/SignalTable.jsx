@@ -131,8 +131,13 @@ export default function SignalTable({ signals = [], selectedSymbol, onSelect, is
               const isSel = sym === selectedSymbol
 
               return (
-                <tr key={sym + s.direction} className={isSel ? 'sel' : ''} onClick={() => onSelect(s)}>
-                  <td><span className="sym"><span>{base}</span><span className="sym-q">/{quote}</span></span></td>
+                <tr key={`${sym}_${s.direction}_${s.exchange}_${s.timeframe}`} className={isSel ? 'sel' : ''} onClick={() => onSelect(s)}>
+                  <td>
+                    <div style={{display:'flex', flexDirection:'column', gap: 2}}>
+                      <span className="sym"><span>{base}</span><span className="sym-q">/{quote}</span></span>
+                      <span style={{ fontSize: 9, color: 'var(--tx-2)', letterSpacing: 1 }}>{s.exchange?.toUpperCase()} · {s.timeframe}</span>
+                    </div>
+                  </td>
                   <td>
                     <span className={`dir-badge ${s.direction === 'LONG' ? 'dir-long' : 'dir-short'}`}>
                       {s.direction}

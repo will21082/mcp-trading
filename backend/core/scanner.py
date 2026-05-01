@@ -104,6 +104,7 @@ def _score_long(ind: dict, metrics: dict, timeframe: str = "15m") -> tuple[int, 
     macd_sig  = ind.get('MACD.signal', 0) or 0
     close     = ind.get('close', 0) or 0
     volume    = ind.get('volume', 0) or 0
+    bb_upper  = ind.get('BB.upper', 0) or 0
 
     # --- HARD FILTERS ---
     quote_vol = close * volume
@@ -114,9 +115,13 @@ def _score_long(ind: dict, metrics: dict, timeframe: str = "15m") -> tuple[int, 
     if is_scalp:
         if bbw > 0.06: return -1, -1, [], []  # Max BBW for Scalp (0.06)
         if rsi < 35 or rsi > 75: return -1, -1, [], []  # RSI bounds
+        # Anti-FOMO CỰC KỲ KHẮT KHE: Giá phải nằm cách mép trên BB ít nhất 0.2% để tránh hoàn toàn pullback
+        if bb_upper and close > bb_upper * 0.998: return -1, -1, [], []
     else:
         if ema200 and close < ema200: return -1, -1, [], []  # Trend must be bullish
         if bbw > 0.09: return -1, -1, [], []  # Max BBW for Swing (0.09)
+        # Anti-FOMO CỰC KỲ KHẮT KHE:
+        if bb_upper and close > bb_upper * 0.995: return -1, -1, [], []
     # --------------------
 
     # 1. BB Rating — Must be positive
@@ -186,6 +191,7 @@ def _score_short(ind: dict, metrics: dict, timeframe: str = "15m") -> tuple[int,
     macd_sig  = ind.get('MACD.signal', 0) or 0
     close     = ind.get('close', 0) or 0
     volume    = ind.get('volume', 0) or 0
+    bb_lower  = ind.get('BB.lower', 0) or 0
 
     # --- HARD FILTERS ---
     quote_vol = close * volume
@@ -196,9 +202,13 @@ def _score_short(ind: dict, metrics: dict, timeframe: str = "15m") -> tuple[int,
     if is_scalp:
         if bbw > 0.06: return -1, -1, [], []  # Max BBW for Scalp
         if rsi < 25 or rsi > 65: return -1, -1, [], []  # RSI bounds
+        # Anti-FOMO CỰC KỲ KHẮT KHE: Giá phải nằm cách mép dưới BB ít nhất 0.2%
+        if bb_lower and close < bb_lower * 1.002: return -1, -1, [], []
     else:
         if ema200 and close > ema200: return -1, -1, [], []  # Trend must be bearish
         if bbw > 0.09: return -1, -1, [], []  # Max BBW for Swing
+        # Anti-FOMO CỰC KỲ KHẮT KHE:
+        if bb_lower and close < bb_lower * 1.005: return -1, -1, [], []
     # --------------------
 
     # 1. BB Rating — Must be negative
@@ -398,11 +408,17 @@ def run_scan(exchanges: list[str] = None, timeframes: list[str] = None) -> list[
             print(f"  [*] Scanning {exchange.upper()} {tf}...")
             sigs = _batch_scan(exchange, tf)
             for s in sigs:
-                # Gộp theo coin + chiều + khung giờ để không bị mất kết quả của các khung khác nhau
-                key = f"{s.symbol}_{s.direction}_{s.timeframe}"
+                # Gộp theo coin + chiều để mỗi coin chỉ hiển thị 1 lần duy nhất (khung giờ cao nhất)
+                key = f"{s.symbol}_{s.direction}"
                 if key not in seen:
                     all_signals.append(s)
                     seen.add(key)
+                else:
+                    # Replace with higher-TF version (1D > 4h > 1h > 15m > 5m)
+                    tf_rank = {"1m": 0, "3m": 1, "5m": 2, "15m": 3, "30m": 4, "1h": 5, "2h": 6, "4h": 7, "1d": 8, "1D": 8, "1W": 9}
+                    existing_idx = next(i for i, x in enumerate(all_signals) if f"{x.symbol}_{x.direction}" == key)
+                    if tf_rank.get(tf, 0) > tf_rank.get(all_signals[existing_idx].timeframe, 0):
+                        all_signals[existing_idx] = s
 
     # Sort: LONG first by quality desc, then SHORT by quality desc
     long_sigs  = sorted([s for s in all_signals if s.direction == "LONG"],
